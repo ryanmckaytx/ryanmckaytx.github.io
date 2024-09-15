@@ -1,0 +1,3 @@
+[submodule "pelican-mediumfox"]
+	path = pelican-mediumfox
+	url = https://github.com/ryanmckaytx/pelican-mediumfox.git
