@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "ryanmckaytx-github-io"
+version = "0.1.0"
+description = ""
+authors = ["Ryan McKay <ryan.michael.mckay@gmail.com>"]
+readme = "README.md"
+packages = [{include = "ryanmckaytx"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pelican = {extras = ["markdown"], version = "^4.9.1"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
