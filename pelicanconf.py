@@ -42,7 +42,11 @@ MARKDOWN = {
         'markdown.extensions.codehilite': {'css_class': 'highlight'},
         'markdown.extensions.extra': {},
         'markdown.extensions.meta': {},
-        "markdown_mermaidjs": {},
+        'markdown.extensions.toc': {
+            'title': "Table of Contents",
+            'permalink': True,
+        },
+        'markdown_mermaidjs': {},
     },
     'output_format': 'html5',
 }
