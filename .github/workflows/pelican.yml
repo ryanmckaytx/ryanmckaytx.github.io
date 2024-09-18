@@ -13,4 +13,5 @@ jobs:
       id-token: "write"
     with:
       settings: "publishconf.py"
-      requirements: "pelican[markdown]"
+      # TODO reuse poetry dependencies
+      requirements: "pelican[markdown] markdown-mermaidjs"

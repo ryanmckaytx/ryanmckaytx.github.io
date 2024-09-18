@@ -34,3 +34,15 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
+
+# TODO: PR back to markdown_mermaidjs to suggest preserving default extensions
+# TODO: PR back to pelican to suggest making DEFAULT_CONFIG more programatically accessible
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+        "markdown_mermaidjs": {},
+    },
+    'output_format': 'html5',
+}

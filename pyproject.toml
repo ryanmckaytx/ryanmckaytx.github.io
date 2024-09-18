@@ -9,6 +9,7 @@ packages = [{include = "ryanmckaytx"}]
 [tool.poetry.dependencies]
 python = "^3.12"
 pelican = {extras = ["markdown"], version = "^4.9.1"}
+markdown-mermaidjs = "^1.0.0"
 
 
 [build-system]

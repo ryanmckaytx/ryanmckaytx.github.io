@@ -124,6 +124,20 @@ rtd = ["jupyter_sphinx", "mdit-py-plugins", "myst-parser", "pyyaml", "sphinx", "
 testing = ["coverage", "pytest", "pytest-cov", "pytest-regressions"]
 
 [[package]]
+name = "markdown-mermaidjs"
+version = "1.0.0"
+description = "Python-Markdown extension to add Mermaid graph"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "markdown_mermaidjs-1.0.0-py3-none-any.whl", hash = "sha256:8bfd594da8ba43707fc6f099111da3b218c8b5a12cec97d59cf490c8772c8a6a"},
+    {file = "markdown_mermaidjs-1.0.0.tar.gz", hash = "sha256:0bb03881fc402dd3079cb36cd012d329530445bb1d404a363d0e2d0cd2d2da03"},
+]
+
+[package.dependencies]
+markdown = ">=3.7"
+
+[[package]]
 name = "markupsafe"
 version = "2.1.5"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -444,4 +458,4 @@ anyio = ">=3.0.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "5724144a94865c3200f508489da6f3b16555f8762b04b39f16ba09f03f8cc7f6"
+content-hash = "75c6d71ce1b9431ab3ae54808fa9b0ba97a030b9ad8374fe027256a1702abe40"
