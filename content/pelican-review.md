@@ -31,3 +31,8 @@ Support added through the third-party [markdown-mermaidjs](https://github.com/Le
       B-->D;
       C-->D;
 ```
+
+## Inline Image
+![Alt Text]({static}/images/bluebonnet-7837830_300.jpg "Bluebonnet")
+
+Image by <a href="https://pixabay.com/users/ray_shrewsberry-7673058/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7837830">Ray Shrewsberry •</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7837830">Pixabay</a>
