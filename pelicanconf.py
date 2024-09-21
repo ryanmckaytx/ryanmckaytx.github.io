@@ -44,7 +44,7 @@ MARKDOWN = {
         'markdown.extensions.meta': {},
         'markdown.extensions.toc': {
             'title': "Table of Contents",
-            'permalink': True,
+            'permalink': '#',
         },
         'markdown_mermaidjs': {},
     },
