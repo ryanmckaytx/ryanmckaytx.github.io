@@ -62,14 +62,14 @@ jobs:
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
-      - name: Install requirements
-        run: pip install ${{ inputs.requirements }}
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
       - name: Build Pelican site
         shell: python
         run: |
           import subprocess
 
-          cmd = "pelican"
+          cmd = "poetry run pelican"
           cmd += " --verbose"
           cmd += " --settings ${{ inputs.settings }}"
           cmd += " --extra-settings"
