@@ -43,4 +43,4 @@ First Header  | Second Header
 Content Cell  | Content Cell
 Content Cell  | Content Cell
 
-It rendered to html correctly, but need to add some style to this table.
+It rendered to html correctly.  The template styling for tables needed some tweaking.
