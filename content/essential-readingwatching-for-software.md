@@ -3,12 +3,13 @@ Date: 2018-04-15 10:30
 Author: Ryan McKay
 Slug: essential-reading-watching-for-software-engineers
 Status: published
+Summary: I've been really fortunate through the years to be surrounded by people who are dedicated to continuous learning and improvement.  A few years ago, I put together a reading list as part of an engineering department reboot.  I updated it late last year.  I have rough reading/discussion times for some of it.
 
 [TOC]
 
 I've been really fortunate through the years to be surrounded by people who are dedicated to continuous learning and improvement.  A few years ago, I put together a reading list as part of an engineering department reboot.  I updated it late last year.  I have rough reading/discussion times for some of it.  What am I missing?  
 
-## Notes
+# Notes
 * Video time slots are roughly 80% watching, 20% discussion
 * Reading time slots are roughly 66% reading, 33% discussion
 * Long chapters are broken up into 2 sessions
