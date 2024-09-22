@@ -7,6 +7,9 @@ The source for this site is at [https://github.com/ryanmckaytx/ryanmckaytx.githu
 # Themes
 I pretty quickly found a theme I like, and [forked](https://github.com/ryanmckaytx/pelican-mediumfox) it to switch out the background image, fix a bug, and make a few styling improvements.  I pulled the forked theme into this repo with a git submodule.
 
+# Github Pages
+Pelican comes with a github action to publish your site to github pages.  But it uses pip and I like to use poetry, so I [tweaked](https://github.com/ryanmckaytx/ryanmckaytx.github.io/blob/main/.github/workflows/pelican_github_pages.yml) it a bit.
+
 # Python-Markdown
 The markdown processor in Pelican is [Python-Markdown](https://python-markdown.github.io/).  It has several [officially supported extensions](https://python-markdown.github.io/extensions/#officially-supported-extensions0) and many [third-party extensions](https://github.com/Python-Markdown/markdown/wiki/Third-Party-Extensions).
 
