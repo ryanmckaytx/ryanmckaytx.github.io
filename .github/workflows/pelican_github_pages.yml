@@ -27,6 +27,11 @@ on:
         default: "3.12"
         description: "The version of Python to use, for example: '3.12' (to use the most recent version of Python 3.12, this is faster) or '3.12.1' (to use an exact version, slower)"
         type: string
+      poetry:
+        required: false
+        default: "1.8.3"
+        description: "The version of Poetry to use, for example: '1.8.3'"
+        type: string
       siteurl:
         required: false
         default: ""
@@ -52,28 +57,17 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: True
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ inputs.python }}
       - name: Checkout theme
         if: ${{ inputs.theme }}
         run: git clone '${{ inputs.theme }}' .theme
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
-      - name: Load cached Poetry installation
-        id: cached-poetry
-        uses: actions/cache@v4
+      - name: "Setup Python, Poetry and Dependencies"
+        uses: dsoftwareinc/setup-python-poetry-action@v1
         with:
-          path: ~/.local  # the path depends on the OS
-          key: poetry-0  # increment to reset cache
-      - name: Install Poetry
-        if: steps.cached-poetry.outputs.cache-hit != 'true'
-        uses: snok/install-poetry@v1
-      - name: Install Poetry dependencies
-        run: |
-          poetry install
+          python-version: ${{ inputs.python }}
+          poetry-version: ${{ inputs.poetry }}
       - name: Build Pelican site
         shell: python
         run: |
