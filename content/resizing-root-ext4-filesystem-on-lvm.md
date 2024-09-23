@@ -3,7 +3,7 @@ Date: 2012-01-14 11:58
 Author: Ryan McKay
 Tags: linux lvm ext4 lvextend resize2fs ubuntu10.04
 Slug: resizing-root-ext4-filesystem-on-lvm
-Status: published
+Status: draft
 
 Resizing an ext4 filesystem on a lvm partition is pretty straightforward - you just extend the logical volume first, then resize the filesystem.  It gets a little more complicated if its the root filesystem that you want to resize, because resizing an online filesystem is riskier and probably not even supported for ext4 filesystems (see [resize2fs man page](http://linux.die.net/man/8/resize2fs)).  In this case, you can boot from a live cd to resize the unmounted root partition.  However, most live cds do not include lvm support.  Here is how to resize your root partition with a Ubuntu 10.04 live cd.  
 

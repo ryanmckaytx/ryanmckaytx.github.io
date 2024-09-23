@@ -3,7 +3,7 @@ Date: 2017-08-23 12:47
 Author: Ryan McKay
 Tags: testing, spring
 Slug: docker-java-example-part-2-spring-web
-Status: published
+Status: draft
 
 <div class="toc">
 

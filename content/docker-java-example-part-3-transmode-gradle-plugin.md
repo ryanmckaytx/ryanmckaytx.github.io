@@ -3,7 +3,7 @@ Date: 2017-08-29 15:23
 Author: Ryan McKay
 Tags: gradle, docker
 Slug: docker-java-example-part3-transmode-gradle-plugin
-Status: published
+Status: draft
 
 <div class="toc">
 

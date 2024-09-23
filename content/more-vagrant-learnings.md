@@ -2,7 +2,7 @@ Title: More Vagrant Learnings
 Date: 2015-03-29 19:59
 Author: Ryan McKay
 Slug: more-vagrant-learnings
-Status: published
+Status: draft
 
 Last time I wrote about [how we use Vagrant to manage our local development environment](http://againstentropy.blogspot.com/2015/01/vagrant-for-local-development.html) at work. Since then I've dug into Vagrant a little more deeply and found a few nuggets I wanted to share.  
 

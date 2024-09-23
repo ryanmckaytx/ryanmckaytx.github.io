@@ -2,7 +2,7 @@ Title: Interview Prep/Tips
 Date: 2017-06-24 18:54
 Author: Ryan McKay
 Slug: interview-preptips
-Status: published
+Status: draft
 
 <!--?xml version="1.0" encoding="UTF-8"?-->
 

@@ -3,7 +3,7 @@ Date: 2017-09-01 13:31
 Author: Ryan McKay
 Tags: gradle, docker
 Slug: docker-java-example-part-4-bmuschko-nebula-gradle-docker-plugins
-Status: published
+Status: draft
 
 <div class="toc">
 

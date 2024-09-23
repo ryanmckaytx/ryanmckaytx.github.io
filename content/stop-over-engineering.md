@@ -3,7 +3,7 @@ Date: 2017-05-24 09:09
 Author: Ryan McKay
 Tags: Readings+Videos
 Slug: stop-over-engineering
-Status: published
+Status: draft
 
 I just watched [Greg Young's Build Stuff 2016 Keynote - Stop Over-Engineering](https://www.youtube.com/watch?v=GRr4xeMn1uU), and had a lot of good takeaways.  
 

@@ -2,7 +2,7 @@ Title: Vagrant for Local Development
 Date: 2015-01-19 15:46
 Author: Ryan McKay
 Slug: vagrant-for-local-development
-Status: published
+Status: draft
 
 When I was hired at my current company about a year and a half ago, it was immediately obvious that this company took dev-ops much more seriously than any other place I had worked before. In fact, a lot of the dev-ops culture is pushed by the ops team, which is a dramatic, and very welcome, departure from my previous experience. This team follows a lot of the principles espoused in the Continuous Delivery book. In this post, I'm going to focus on the principle of making all pre-prod environments as production-like as possible, and in particular, what has been done in the local development environment.  
 

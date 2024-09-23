@@ -3,7 +3,7 @@ Date: 2014-06-20 20:21
 Author: Ryan McKay
 Tags: pairing, agile, pair-programming
 Slug: pair-programming-benefits
-Status: published
+Status: draft
 
 For the last year and a bit, I've been pair programming about 90% of my dev time (i.e. outside of meetings).  I've seen several major benefits compared to the previous 15 years of solo programming.  But I've seen some issues as well.  I think they are addressable, but they are issues to stay aware of.  I'm going to use this post to talk about the benefits, then follow up with another to discuss the issues I have identified.  
 

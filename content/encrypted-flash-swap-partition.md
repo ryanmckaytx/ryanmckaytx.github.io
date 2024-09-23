@@ -3,7 +3,7 @@ Date: 2011-12-21 08:55
 Author: Ryan McKay
 Tags: linux encryption swap
 Slug: encrypted-flash-swap-partition
-Status: published
+Status: draft
 
 Flash swap can improve performance on systems with low memory, and its pretty cheap.  My laptop has 4GB of memory, but I run a lot of applications and browser tabs, so I still end up swapping.  Using flash for swap doesn't make much if any difference while you're using a single application, but I do notice a significant speedup when switching to other applications that have been swapped out.  I'm running Ubuntu 10.04 with encrypted home directory, which also encrypts the swap partition, so I want my new flash swap encrypted as well.  I'm using a Verbatim Stay 'n Store 4GB drive ([\$9 at amazon](http://amzn.com/B004BLIQDC)) , which has a very small physical footprint, so I can just leave it in all the time.  
 

@@ -3,7 +3,7 @@ Date: 2017-07-23 21:12
 Author: Ryan McKay
 Tags: gradle, spring
 Slug: docker-java-example-part-1-initializing
-Status: published
+Status: draft
 
 <div class="toc">
 

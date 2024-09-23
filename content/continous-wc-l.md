@@ -3,7 +3,7 @@ Date: 2013-01-06 16:40
 Author: Ryan McKay
 Tags: awk, tail
 Slug: continous-wc-l
-Status: published
+Status: draft
 
 When you want to see how fast lines are being appended to a file, try this:  
 

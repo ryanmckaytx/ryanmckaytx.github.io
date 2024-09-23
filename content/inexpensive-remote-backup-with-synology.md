@@ -3,7 +3,7 @@ Date: 2011-11-27 09:48
 Author: Ryan McKay
 Tags: ssh, backup, ds110j, linux, rdiff-backup, synology
 Slug: inexpensive-remote-backup-with-synology
-Status: published
+Status: draft
 
 <span class="Apple-style-span"></span>
 
