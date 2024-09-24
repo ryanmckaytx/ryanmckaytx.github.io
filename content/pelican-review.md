@@ -61,7 +61,7 @@ It rendered to html correctly.  The template styling for tables needed some twea
 
 # Import from Blogspot
 Pelican provides the [pelican-import](https://docs.getpelican.com/en/latest/importer.html) tool for importing content from various sources.
-The exported content from blogspot was about 400KB of xml.  After running the tool, all of my blog entry became pages as expected, but there were some unexpected aspects:
+The exported content from blogspot was about 400KB of xml.  After running the tool, all of my blog entries became pages as expected, but there were some unexpected aspects:
 
 * The comments from the original blog entries each became another page
 * The page content had a lot of embedded html that didn't look good ([example](/drafts/docker-java-example-part-1-initializing-original-import))
