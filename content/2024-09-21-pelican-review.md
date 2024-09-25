@@ -1,5 +1,8 @@
 Title: Pelican Static Site Generator
 Date: 2024-09-21 17:00
+Author: Ryan McKay
+Tags: python, ssg, pelican
+Status: published
 
 I'm migrating my blogs on various sites (primarily [blogspot](https://againstentropy.blogspot.com/)) to github pages.  I like specifying the content in markdown and having revision control.
 
