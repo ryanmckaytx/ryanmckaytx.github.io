@@ -3,23 +3,22 @@ Date: 2017-09-14 17:28
 Author: Ryan McKay
 Tags: docker, kubernetes
 Slug: docker-java-example-part-5-kubernetes
-Status: draft
+Status: published
 Summary: Now that I've got my project getting packaged up in a docker image, the next step in this POC is to look at platforms for running docker. The only PaaS that I am familiar with now is Pivotal Cloud Foundry, which we used at my last job to deploy Spring Boot executable jars. PCF was working on a docker story, not sure how far that got. It looks like they are pretty [bought into Kubernetes](https://pivotal.io/pks) these days. 
 
 <div class="toc" markdown="1">
-<span class="toctitle">Docker Java Example Series</span>
+<div class="toctitle">Docker Java Example Series</div>
 
-1. [Initializing a new Spring Boot Project](http://againstentropy.blogspot.com/2017/07/docker-java-example-part-1-initializing.html)
-2. [Spring Web MVC Testing](http://againstentropy.blogspot.com/2017/08/docker-java-example-part-2-spring-web.html)
-3. [Transmode Gradle Plugin](http://againstentropy.blogspot.com/2017/08/docker-java-example-part3-transmode-gradle-plugin.html)
-4. [Bmuschko and Nebula Gradle Plugins](http://againstentropy.blogspot.com/2017/09/docker-java-example-part-4-bmuschko-nebula-gradle-docker-plugins.html)
-5. [Kubernetes](https://againstentropy.blogspot.com/2017/09/docker-java-example-part-5-kubernetes.html)
+1. [Initializing a new Spring Boot Project](/docker-java-example-part-1-initializing.html)
+2. [Spring Web MVC Testing](/docker-java-example-part-2-spring-web.html)
+3. [Transmode Gradle Plugin](/docker-java-example-part3-transmode-gradle-plugin.html)
+4. [Bmuschko and Nebula Gradle Plugins](/docker-java-example-part-4-bmuschko-nebula-gradle-docker-plugins.html)
+5. [Kubernetes](/docker-java-example-part-5-kubernetes.html)
 </div>
 
 Now that I've got my project getting packaged up in a docker image, the next step in this POC is to look at platforms for running docker. The only PaaS that I am familiar with now is Pivotal Cloud Foundry, which we used at my last job to deploy Spring Boot executable jars. PCF was working on a docker story, not sure how far that got. It looks like they are pretty [bought into Kubernetes](https://pivotal.io/pks) these days. In fact it seems like the whole cloud world is moving in that direction, with the likes of Pivotal, VMware, Amazon, Microsoft, Dell, Alibaba, and Mesosphere joining the [Cloud Native Computing Foundation](https://www.cncf.io/). So, I set out to learn more about Kubernetes.  
 
-<!-- <div class="separator" style="clear: both; text-align: center;"> -->
-![Alt Text]({static}/images/kubernetes.png "Kubernetes")
+![Kubernetes logo]({static}/images/kubernetes.png "Kubernetes")
   
 I started out by following the excellent [Hello Minikube](https://kubernetes.io/docs/tutorials/stateless-application/hello-minikube/) tutorial provided in the kubernetes docs. It steps you through installing local kubernetes (a.k.a. minikube), creating a docker image, deploying it to kubernetes, making it accessible outside the cluster, and live updating the running image. I followed the tutorial as written first, then applied it to my demo java project. Of course, I ran into some issues.
 
@@ -78,7 +77,8 @@ java-docker-example   1         1         1            1           1d
 
 $ kubectl describe deployment java-docker-example
 Name:            java-docker-example
-Namespace:        defaultCreationTimestamp:    Thu, 07 Sep 2017 00:00:37 -0500
+Namespace:        default
+CreationTimestamp:    Thu, 07 Sep 2017 00:00:37 -0500
 Labels:            run=java-docker-example
 Annotations:        deployment.kubernetes.io/revision=1
 Selector:        run=java-docker-example
@@ -86,24 +86,25 @@ Replicas:        1 desired | 1 updated | 1 total | 1 available | 0 unavailable
 StrategyType:        RollingUpdate
 MinReadySeconds:    0
 RollingUpdateStrategy:    1 max unavailable, 1 max surge
-Pod Template:  
-    Labels:    run=java-docker-example  
-    Containers:   java-docker-example:    
-        Image:        ryanmckay/java-docker-example:0.0.1-SNAPSHOT    
-        Port:        8080/TCP    
-        Environment:    <none>    
-        Mounts:        <none>  
-    Volumes:        <none>
-Conditions:  
-    Type        Status    Reason  
-    ----        ------    ------  
-    Available     True    MinimumReplicasAvailable
+Pod Template<:
+  Labels:    run=java-docker-example
+  Containers:
+   java-docker-example:
+    Image:        ryanmckay/java-docker-example:0.0.1-SNAPSHOT
+    Port:        8080/TCP
+    Environment:    <none>
+    Mounts:        <none>
+  Volumes:        <none>
+Conditions:
+  Type        Status    Reason
+  ----        ------    ------
+  Available     True    MinimumReplicasAvailable
 OldReplicaSets:    <none>
 NewReplicaSet:    java-docker-example-3948992014 (1/1 replicas created)
-Events:  
-    FirstSeen    LastSeen    Count    From            SubObjectPath    Type        Reason            Message  
-    ---------    --------    -----    ----            -------------    --------    ------            -------  
-    1d        1d        1    deployment-controller            Normal        ScalingReplicaSet    Scaled up replica set java-docker-example-3948992014 to 1
+Events:
+  FirstSeen    LastSeen    Count    From            SubObjectPath    Type        Reason            Message
+  ---------    --------    -----    ----            -------------    --------    ------            -------
+  1d        1d        1    deployment-controller            Normal        ScalingReplicaSet    Scaled up replica set java-docker-example-3948992014 to 1
 ```
 
 Notice the "Pod Template" section that describes the type of pod that will be managed by this deployment (through a replica set). At any given time, a deployment may be managing multiple active replica sets, which may in turn be managing multiple pods. In this example, there is only one replica set, and it is only managing one pod. But if you configured higher replication and rolling update, then during a change to the deployment spec, it will be managing spinning down the old replica set while spinning up the new replica set, at a minimum. If the spec changes faster than kubernetes can apply it, it could be more than that.  
@@ -115,23 +116,28 @@ $ kubectl describe replicaset java-docker-example-3948992014
 Name:  java-docker-example-3948992014
 Namespace: default
 Selector: pod-template-hash=3948992014,run=java-docker-example
-Labels:  pod-template-hash=3948992014  run=java-docker-example
-Annotations: deployment.kubernetes.io/desired-replicas=1  deployment.kubernetes.io/max-replicas=2  deployment.kubernetes.io/revision=1
+Labels:  pod-template-hash=3948992014
+  run=java-docker-example
+Annotations: deployment.kubernetes.io/desired-replicas=1
+  deployment.kubernetes.io/max-replicas=2
+  deployment.kubernetes.io/revision=1
 Controlled By: Deployment/java-docker-example
 Replicas: 1 current / 1 desired
 Pods Status: 1 Running / 0 Waiting / 0 Succeeded / 0 Failed
-Pod Template:  
-    Labels: pod-template-hash=3948992014  run=java-docker-example  
-    Containers:   
-        java-docker-example:    
-            Image:  ryanmckay/java-docker-example:0.0.1-SNAPSHOT    
-            Port:  8080/TCP    
-            Environment: <none>    
-            Mounts:  <none>  
-    Volumes:  <none>
-Events:  FirstSeen LastSeen Count From   SubObjectPath Type  Reason   Message  
-    --------- -------- ----- ----   ------------- -------- ------   -------  
-    24m  24m  1 replicaset-controller   Normal  SuccessfulCreate Created pod: java-docker-example-3948992014-h1c0l
+Pod Template:
+  Labels: pod-template-hash=3948992014
+  run=java-docker-example
+  Containers:
+   java-docker-example:
+    Image:  ryanmckay/java-docker-example:0.0.1-SNAPSHOT
+    Port:  8080/TCP
+    Environment: <none>
+    Mounts:  <none>
+  Volumes:  <none>
+Events:
+  FirstSeen LastSeen Count From   SubObjectPath Type  Reason   Message
+  --------- -------- ----- ----   ------------- -------- ------   -------
+  24m  24m  1 replicaset-controller   Normal  SuccessfulCreate Created pod: java-docker-example-3948992014-h1c0l
 ```
 
 You can see the created pods in the replica set's Events log. It is worth noting that the "kubectl describe" command output is intended for human consumption. To get details in a machine readable format, use "kubectl get -o json".
