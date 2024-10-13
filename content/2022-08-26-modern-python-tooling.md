@@ -180,3 +180,32 @@ poetry install --sync
 ```
 This will synchronize the dependencies installed in the virtual env with the current state of the poetry.lock file (including removing/downgrading dependencies if necessary). 
 This is very useful when you are jumping around between branches that might have different dependencies specified.
+
+## Testing
+The two main testing libraries for Python are unittest (built in to Python) and pytest. I like pytest better for a few reasons:
+
+* More informative assertion failures
+* Easy, robust fixture management
+* Lots of useful plugins
+* Low explicit dependence on test framework
+    * No inheriting from Testcase
+    * No self.assertEqual, etc
+* Supports existing UnitTest-based tests
+
+### Pytest Plugins and Built-ins
+There are almost 1500 [registered plugins](https://docs.pytest.org/en/stable/reference/plugin_list.html) for pytest. 
+Here are a few plugins (and built-ins) I have found useful:
+
+* [--durations](https://docs.pytest.org/en/stable/example/simple.html#profiling-test-duration) - pytest has built-in support for measuring and reporting test durations. 
+I use this to identify the slowest-running tests, in order to target them for speeding up.
+[pytest-durations](https://pypi.org/project/pytest-durations/) is a plugin that gives more detailed information broken down into fixture creation, setup, run, and teardown.
+* [caplog](https://docs.pytest.org/en/stable/how-to/logging.html#caplog-fixture)/[pytest-loguru](https://pypi.org/project/pytest-loguru/) - caplog is useful for making assertions about logging activity in the code under test.
+I like to use [loguru](https://loguru.readthedocs.io/en/stable/) for logging with context, and the pytest-loguru plugin makes those logs available to caplog.
+* [pytest-asyncio](https://pypi.org/project/pytest-asyncio/) - convenient for testing async code
+* [pytest-cov](https://pypi.org/project/pytest-cov/) - capture coverage report from test run
+* [pytest-datadir](https://pypi.org/project/pytest-datadir/) - pytest plugin for test data directories and files. 
+I mostly use datadir to hold input files or expected output files I want to compare against. 
+pytest-datadir creates a pristine copy of the datadir for each test run, so you can write output files to it for post-hoc analysis, without interfering with other tests.  
+It cleans up these copies automatically after a while.
+* [pytest-rerunfailures](https://pypi.org/project/pytest-rerunfailures/) - mark specific tests as flaky and specify a retry policy. Obviously it is better to root cause and remove the flakiness, but sometimes you need a quick fix.
+* [pytest-timeout](https://pypi.org/project/pytest-timeout/) - use this to kill tests that take too long.  The threshold can be set globally or on specific tests.
