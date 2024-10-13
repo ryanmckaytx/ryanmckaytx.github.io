@@ -79,7 +79,7 @@ Python 3.10.6
 ```
 
 ## Python dependency management
-For this I like to use `poetry`, for a few reasons:  
+For this I like to use [`poetry`](https://python-poetry.org/), for a few reasons:  
 
 * Integrated virtual environement support
 * Dependency groups - Easy separation between production dependencies and dev/test/etc dependencies
@@ -173,3 +173,10 @@ $ which python
 $ python --version
 Python 3.10.6
 ```
+
+One feature of poetry that I really like is 
+``` bash
+poetry install --sync
+```
+This will synchronize the dependencies installed in the virtual env with the current state of the poetry.lock file (including removing/downgrading dependencies if necessary). 
+This is very useful when you are jumping around between branches that might have different dependencies specified.
