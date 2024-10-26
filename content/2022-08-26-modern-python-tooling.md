@@ -154,7 +154,7 @@ This is very useful when you are jumping around between branches that might have
 # Testing
 The two main testing libraries for Python are unittest (built in to Python) and pytest. I like pytest better for a few reasons:
 
-* More informative assertion failures
+* Informative assertion failures
 * Easy, robust fixture management
 * Lots of useful plugins
 * Low explicit dependence on test framework
@@ -186,14 +186,19 @@ It cleans up these copies automatically after a while.
 poetry add --group dev pytest
 ```
 Poetry lets you group dependencies.  This is handy for keeping your dev dependencies out of your production deployable.
-Let's add a quick red test:
+Let's add a quick red test that shows off fixtures and informative assertion failures:
 ``` python
-def test_first_roll_score():
-    # GIVEN
-    game = BowlingGame()
+import pytest
+from py_bowling.bowling_game import BowlingGame
 
+@pytest.fixture
+def game():
+    return BowlingGame()
+
+def test_first_roll_score(game):
     # EXPECT
     assert game.roll(10) == 10
+
 ```
 
 and implementation
