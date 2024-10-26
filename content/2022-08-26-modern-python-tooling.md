@@ -8,7 +8,7 @@ Summary: Modern Python tooling for managing dependencies, testing, and linting
 Modern Python development involves managing dependencies, and testing and linting your code.
 I'm going to review a few of the related tools for that I've had success with.
 
-To help demonstrate some of the concepts, I'm going to do some work building a [bowling scorer](https://kata-log.rocks/bowling-game-kata).
+To help demonstrate some of the concepts, I'm going to do some work on the [gilded rose kata](https://kata-log.rocks/gilded-rose-kata).
 
 # Python Version Management
 Python projects destined for deployment should pin a specific version of Python, just like any other dependency, so that you get repeatable behavior in every environment, from local dev to production. 
@@ -67,7 +67,7 @@ $ pyenv global 3.10.6
 $ pyenv local 3.10.6
 
 $ pyenv version
-3.10.6 (set by /Users/ryanmckay/projects/py-bowling/.python-version)
+3.10.6 (set by /Users/ryanmckay/projects/gilded-rose-kata/.python-version)
 
 $ cat ./.python-version
 3.10.6
@@ -100,14 +100,14 @@ $ poetry config virtualenvs.in-project true
 
 ## Project Initialization
 ``` bash
-$ poetry new --src py-bowling
-Created package py_bowling in py-bowling
-$ tree py-bowling
-py-bowling
+$ poetry new --src gilded-rose-kata
+Created package gilded_rose_kata in gilded-rose-kata
+$ tree gilded-rose-kata
+gilded-rose-kata
 ├── README.md
 ├── pyproject.toml
 ├── src
-│   └── py_bowling
+│   └── gilded_rose_kata
 │       └── __init__.py
 └── tests
     └── __init__.py
@@ -120,25 +120,25 @@ The lockfile is good for making sure that every install gets exactly the same ve
 Because of this property, we can use it for dependency caching in our CI job later.
 
 ``` bash
-$ cd py-bowling
+$ cd gilded-rose-kata
 $ poetry install
-Creating virtualenv py-bowling in /Users/ryanmckay/projects/py-bowling/.venv
+Creating virtualenv gilded-rose-kata in /Users/ryanmckay/projects/gilded-rose-kata/.venv
 Updating dependencies
 Resolving dependencies... (0.1s)
 
 Writing lock file
 
-Installing the current project: py-bowling (0.1.0)
+Installing the current project: gilded-rose-kata (0.1.0)
 ```
 
 We can activate the virtual env with:
 ``` bash
 $ poetry shell
-Spawning shell within /Users/ryanmckay/projects/py-bowling/.venv
-py-bowling . /Users/ryanmckay/projects/py-bowling/.venv/bin/activate
+Spawning shell within /Users/ryanmckay/projects/gilded-rose-kata/.venv
+gilded-rose-kata . /Users/ryanmckay/projects/gilded-rose-kata/.venv/bin/activate
 
 $ which python
-/Users/ryanmckay/projects/py-bowling/.venv/bin/python
+/Users/ryanmckay/projects/gilded-rose-kata/.venv/bin/python
 
 $ python --version
 Python 3.10.6
@@ -190,56 +190,58 @@ poetry add --group dev pytest
 Poetry lets you group dependencies.  This is handy for keeping your dev dependencies out of your production deployable.
 
 ## Test
-Let's add a quick red test that shows off fixtures and informative assertion failures:
+Starting with the existing [gilded rose implementation](https://github.com/emilybache/GildedRose-Refactoring-Kata/blob/main/python/gilded_rose.py)
+(with some minor modifications to show off pytest fixtures), let's add a quick red test:
 ``` python
 import pytest
-from py_bowling.bowling_game import BowlingGame
+from gilded_rose_kata.gilded_rose import GildedRose, Item
 
 @pytest.fixture
-def game():
-    return BowlingGame()
+def rose():
+    return GildedRose()
 
-def test_first_roll_score(game):
-    # EXPECT
-    assert game.roll(10) == 10
+def test_update_quality(rose):
+    # GIVEN
+    initial_quality = 6
+    item = Item(name="Conjured Mana Cake", sell_in=3, quality=initial_quality)
 
+    # EXPECT quality should have degraded by 2
+    assert rose.update_quality(item).quality == 4
 ```
-
-and implementation
-```python
-class BowlingGame:
-    score: int = 0
-
-    def roll(self, pins: int) -> int:
-        return self.score
-```
-
-test output looks like:
-```
+Notice how easy it is to set up reusable test fixtures. 
+If any test wants to use the `rose` fixture, it just has to add the `rose` parameter.
+Test output looks like:
+``` bash
 $ pytest
-================================= test session starts =================================
+================================== test session starts =================================
 platform darwin -- Python 3.10.6, pytest-8.3.3, pluggy-1.5.0
-rootdir: /Users/ryanmckay/projects/py-bowling
+rootdir: /Users/ryanmckay/projects/gilded-rose-kata
 configfile: pyproject.toml
 collected 1 item
 
-tests/test_bowling_score.py F                                                   [100%]
+tests/test_gilded_rose.py F                                                      [100%]
 
-====================================== FAILURES =======================================
-________________________________ test_first_roll_score ________________________________
+======================================= FAILURES =======================================
+__________________________________ test_update_quality _________________________________
 
-    def test_first_roll_score():
+rose = <gilded_rose_kata.gilded_rose.GildedRose object at 0x105655f00>
+
+    def test_update_quality(rose):
         # GIVEN
-        game = BowlingGame()
+        initial_quality = 6
+        item = Item(name="Conjured Mana Cake", sell_in=3, quality=initial_quality)
 
-        # EXPECT
->       assert game.roll(10) == 10
-E       assert 0 == 10
-E        +  where 0 = roll(10)
-E        +    where roll = <py_bowling.bowling_game.BowlingGame object at 0x102395d50>.roll
+        # EXPECT quality should have degraded by 2
+>       assert rose.update_quality(item).quality == 4
+E       assert 5 == 4
+E        +  where 5 = Conjured Mana Cake, 2, 5.quality
+E        +    where Conjured Mana Cake, 2, 5 = update_quality(Conjured Mana Cake, 3, 6)
+E        +      where update_quality = <gilded_rose_kata.gilded_rose.GildedRose object at 0x105655f00>.update_quality
 
-tests/test_bowling_score.py:9: AssertionError
-=============================== short test summary info ===============================
-FAILED tests/test_bowling_score.py::test_first_roll_score - assert 0 == 10
-================================== 1 failed in 0.02s ==================================
+tests/test_gilded_rose.py:15: AssertionError
+================================ short test summary info ===============================
+FAILED tests/test_gilded_rose.py::test_update_quality - assert 5 == 4
+=================================== 1 failed in 0.01s ==================================
 ```
+I really like this detailed assertion failure output. 
+I spent most of my career working with Java, where you needed something like [Spock]({static}/docker-java-example-part-2-spring-web.html) to get output like this.
