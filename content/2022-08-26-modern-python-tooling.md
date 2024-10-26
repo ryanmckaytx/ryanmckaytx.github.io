@@ -152,7 +152,7 @@ This will synchronize the dependencies installed in the virtual env with the cur
 This is very useful when you are jumping around between branches that might have different dependencies specified.
 
 # Testing
-The two main testing libraries for Python are unittest (built in to Python) and pytest. I like pytest better for a few reasons:
+The two main testing libraries for Python are unittest (built in to Python) and pytest. I like pytest for a few reasons:
 
 * Informative assertion failures
 * Easy, robust fixture management
@@ -161,6 +161,8 @@ The two main testing libraries for Python are unittest (built in to Python) and 
     * No inheriting from Testcase
     * No self.assertEqual, etc
 * Supports existing UnitTest-based tests
+
+![pytest logo]({static}/images/pytest-200.png "pytest")
 
 ## Pytest Plugins and Built-ins
 There are almost 1500 [registered plugins](https://docs.pytest.org/en/stable/reference/plugin_list.html) for pytest. 
