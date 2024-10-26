@@ -186,6 +186,8 @@ It cleans up these copies automatically after a while.
 poetry add --group dev pytest
 ```
 Poetry lets you group dependencies.  This is handy for keeping your dev dependencies out of your production deployable.
+
+## Test
 Let's add a quick red test that shows off fixtures and informative assertion failures:
 ``` python
 import pytest
