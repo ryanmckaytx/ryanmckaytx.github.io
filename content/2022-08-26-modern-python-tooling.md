@@ -245,3 +245,85 @@ FAILED tests/test_gilded_rose.py::test_update_quality - assert 5 == 4
 ```
 I really like this detailed assertion failure output. 
 I spent most of my career working with Java, where you needed something like [Spock]({static}/docker-java-example-part-2-spring-web.html) to get output like this.
+
+# Pre-commit
+[Pre-commit](https://pre-commit.com/) is a tool for running a variety of static checks as a git precommit hook. 
+Two of my favorites for Python are [black](https://github.com/psf/black) and [pylint](https://github.com/pylint-dev/pylint).
+
+![pre-commit logo]({static}/images/pre-commit-logo.png "pre-commit")
+
+## Installation
+
+with `.pre-commit-config.yaml` configured as:
+``` yaml
+repos:
+-   repo: https://github.com/psf/black
+    rev: 22.6.0
+    hooks:
+    -   id: black
+-   repo: https://github.com/pylint-dev/pylint
+    rev: 'v2.15.0'  # Replace with the latest version of pylint
+    hooks:
+    -   id: pylint
+        args: [
+            '--disable=C0114,C0116', # Add any pylint disables you want here
+        ]
+```
+
+then install
+``` bash
+$ poetry add --group dev pre-commit
+$ pre-commit install-hooks
+[INFO] Initializing environment for https://github.com/psf/black.
+[INFO] Initializing environment for https://github.com/pylint-dev/pylint.
+[INFO] Installing environment for https://github.com/psf/black.
+[INFO] Once installed this environment will be reused.
+[INFO] This may take a few minutes...
+[INFO] Installing environment for https://github.com/pylint-dev/pylint.
+[INFO] Once installed this environment will be reused.
+[INFO] This may take a few minutes...
+$ pre-commit install
+pre-commit installed at .git/hooks/pre-commit
+```
+
+## Run
+The git precommit hook runs against modified files only, but we can run the hooks against all the code:
+``` bash
+$ pre-commit run --all-files
+black....................................................................Failed
+- hook id: black
+- files were modified by this hook
+
+reformatted tests/test_gilded_rose.py
+reformatted src/gilded_rose_kata/gilded_rose.py
+
+All done! ✨ 🍰 ✨
+2 files reformatted, 2 files left unchanged.
+
+pylint...................................................................Failed
+- hook id: pylint
+- exit code: 30
+
+************* Module gilded_rose_kata.gilded_rose
+src/gilded_rose_kata/gilded_rose.py:4:0: C0115: Missing class docstring (missing-class-docstring)
+src/gilded_rose_kata/gilded_rose.py:11:15: C0209: Formatting a regular string which could be a f-string (consider-using-f-string)
+src/gilded_rose_kata/gilded_rose.py:4:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+src/gilded_rose_kata/gilded_rose.py:14:0: C0115: Missing class docstring (missing-class-docstring)
+src/gilded_rose_kata/gilded_rose.py:14:0: R0205: Class 'GildedRose' inherits from object, can be safely removed from bases in python3 (useless-object-inheritance)
+src/gilded_rose_kata/gilded_rose.py:19:12: R1714: Consider merging these comparisons with 'in' by using 'updated_item.name not in ('Aged Brie', 'Backstage passes to a TAFKAL80ETC concert')'. Use a set instead if elements are hashable. (consider-using-in)
+src/gilded_rose_kata/gilded_rose.py:15:4: R0912: Too many branches (17/12) (too-many-branches)
+src/gilded_rose_kata/gilded_rose.py:14:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module tests.test_gilded_rose
+tests/test_gilded_rose.py:1:0: E0401: Unable to import 'pytest' (import-error)
+tests/test_gilded_rose.py:10:24: W0621: Redefining name 'rose' from outer scope (line 6) (redefined-outer-name)
+
+------------------------------------------------------------------
+Your code has been rated at 6.74/10 (previous run: 6.74/10, +0.00)
+```
+Both hooks failed.  If that had happened during `git commit`, it would have aborted the commit.
+The `black` hook fixes python formatting, so all we need to do is commit the modified files.
+I like this approach for running black, because you can see what it did.
+
+A pylint score of `6.74` is pretty low.  By default it fails with anything less than 10/10.
+You can set the failing score threshold with `--fail-under`, 
+which is convenient for setting a linting floor when you are adding linting to an existing project.
