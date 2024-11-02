@@ -1,5 +1,5 @@
 Title: Pelican Static Site Generator
-Date: 2024-09-21 17:00
+Date: 2024-11-02 17:00
 Author: Ryan McKay
 Tags: python, ssg, pelican
 Status: published
@@ -15,6 +15,7 @@ The source for this site is at [https://github.com/ryanmckaytx/ryanmckaytx.githu
 # Themes
 I pretty quickly found a theme I like, and [forked](https://github.com/ryanmckaytx/pelican-mediumfox)
 it to switch out the background image, fix a bug, and make a few styling improvements. 
+I also [updated](https://github.com/ryanmckaytx/pelican-mediumfox/commit/1f85c794b2a4ae86b24baf594c9ff96d06a9275a) it to support the `GOOGLE_ANALYTICS` config option.
 I pulled the forked theme into this repo with a git submodule.
 
 # Github Pages
